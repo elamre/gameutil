@@ -3,8 +3,6 @@ package gameutil
 import (
 	"math"
 
-	"github.com/rs/xid"
-
 	"github.com/hajimehoshi/ebiten"
 )
 
@@ -29,7 +27,6 @@ type BasicObject struct {
 	NotCentered                bool
 	Width, Height              int
 	WidthF, HeightF            float64
-	ID                         xid.ID
 	isCentered                 bool
 	Velocity                   *Vector2d
 	Position                   *Vector2d
@@ -164,7 +161,6 @@ func (obj *BasicObject) AddY(vY float64) {
 //NewBasicObject returns a new oject
 func NewBasicObject(x, y float64, w, h int) *BasicObject {
 	obj := &BasicObject{
-		ID:         xid.New(),
 		Width:      w,
 		Height:     h,
 		WidthF:     float64(w),
@@ -175,21 +171,6 @@ func NewBasicObject(x, y float64, w, h int) *BasicObject {
 	}
 
 	return obj
-}
-
-//GetID returns the guid of the Basic Object
-func (obj BasicObject) GetID() xid.ID {
-	return obj.ID
-}
-
-//GetIDasString returns the string representation of the guid
-func (obj BasicObject) GetIDasString() string {
-	return obj.ID.String()
-}
-
-//SetID sets the BasicObject's ID to a new guid
-func (obj *BasicObject) SetID() {
-	obj.ID = xid.New()
 }
 
 //Left edge of the rectangle
