@@ -1,4 +1,4 @@
-package tentsuyutils
+package gameutil
 
 import (
 	"math"

@@ -4,7 +4,6 @@ import (
 	"math"
 	"math/rand"
 
-	"github.com/atolVerderben/tentsuyu/tentsuyutils"
 
 	"github.com/hajimehoshi/ebiten"
 )
@@ -164,7 +163,7 @@ func (c *Camera) moveToDestination() {
 		c.x += c.freeFloatSpeed * math.Cos(angle)
 		c.y += c.freeFloatSpeed * math.Sin(angle)
 
-		if tentsuyutils.Distance(c.x, c.y, c.destX, c.destY) <= 5 {
+		if Distance(c.x, c.y, c.destX, c.destY) <= 5 {
 			c.moving = false
 			c.x = c.destX
 			c.y = c.destY
