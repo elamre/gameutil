@@ -32,7 +32,7 @@ type Game struct {
 //NewGame returns a new Game while setting the width and height of the screen
 func NewGame(screenWidth, screenHeight float64) (game *Game, err error) {
 	game = &Game{
-		GameData:      NewGameData(),
+		GameData: NewGameData(),
 		//Random:            rand.New(rand.NewSource(time.Now().UnixNano())),
 		Input:             NewInputController(),
 		DefaultCamera:     CreateCamera(screenWidth, screenHeight),
@@ -90,7 +90,7 @@ func (g *Game) ToggleFullscreen() {
 
 // Update proceeds the game state.
 // Update is called every tick (1/60 [s] by default).
-func (g *Game) Update(screen *ebiten.Image) error {
+func (g *Game) Update() error {
 	g.Input.Update()
 
 	if err := g.GameStateLoop(); err != nil {
@@ -134,7 +134,9 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeigh
 //This is for backwards compatibility with older ebiten
 func (g *Game) Loop(screen *ebiten.Image) error {
 
-	g.Update(screen)
+	if e := g.Update(); e != nil {
+		return e
+	}
 
 	if ebiten.IsFocused() {
 		g.Draw(screen)
