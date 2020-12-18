@@ -4,7 +4,7 @@ import (
 	"log"
 	"math/rand"
 
-	"github.com/hajimehoshi/ebiten"
+	"github.com/hajimehoshi/ebiten/v2"
 )
 
 //GameHelperFunction is a function that takes no parameters and returns an error
@@ -135,7 +135,8 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeigh
 func (g *Game) Loop(screen *ebiten.Image) error {
 
 	g.Update(screen)
-	if !ebiten.IsDrawingSkipped() {
+
+	if ebiten.IsFocused() {
 		g.Draw(screen)
 	}
 

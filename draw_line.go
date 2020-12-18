@@ -1,24 +1,17 @@
 package gameutil
 
 import (
-	"github.com/hajimehoshi/ebiten"
+	"github.com/hajimehoshi/ebiten/v2"
 	"image/color"
-	"log"
 	"math"
 )
 
-var Pixel *ebiten.Image
+//Create Pixel
+var Pixel *ebiten.Image = ebiten.NewImage(1, 1)
 
-
-func InitPixel(){
-	//Create Pixel
-	var err error
+func InitPixel() {
 	//Simple white 1x1 pixel image for manipulation
-	Pixel, err := ebiten.NewImage(1, 1, ebiten.FilterNearest)
-	if err != nil {
-		log.Fatal(err)
-	}
-	_ = Pixel.Fill(color.RGBA{R: 255, G: 255, B: 255, A: 255})
+	Pixel.Fill(color.RGBA{R: 255, G: 255, B: 255, A: 255})
 }
 
 func colorScale(clr color.Color) (rf, gf, bf, af float64) {
@@ -33,7 +26,6 @@ func colorScale(clr color.Color) (rf, gf, bf, af float64) {
 	af = float64(a) / 0xffff
 	return
 }
-
 
 // DrawLine draws a line segment on the given destination dst.
 //
@@ -50,5 +42,5 @@ func DrawLine(dst *ebiten.Image, x1, y1, x2, y2 float64, clr color.Color, camera
 	camera.ApplyCameraTransform(op, true)
 	// Filter must be 'nearest' filter (default).
 	// Linear filtering would make edges blurred.
-	_ = dst.DrawImage(Pixel, op)
+	dst.DrawImage(Pixel, op)
 }
